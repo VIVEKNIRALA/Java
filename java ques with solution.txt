@@ -1,0 +1,627 @@
+https://docs.google.com/document/d/1A3CxT2FaqqVWbRFyRMiPGuiL_oq-dUZVa5qa1-xJc6o/edit?usp=sharing
+
+
+
+
+
+Q1. Mr. Kapil singh is a software eng. And he pays annual income tax as per the conditions.
+Income                             	tax
+4lc-7lc                               	no tax
+7lc – 10 lc                             5% on first exceeding 7 lcs
+10lc-14lc                           	10% on exceeding 10 lcs
+14lc – 18lc                         	15% on exceeding 14 lcs
+>18lcs                               	25% on exceeding 18 lcs
+
+
+
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter Annual Salaray:");
+        int a = in.nextInt();
+        double tax=0;
+        if(a>=400000 && a <700000) {
+            System.out.println("No Tax!!");
+        }
+        else {
+            if(a>=700000 && a<1000000) {
+                tax= a- (a-700000*5/100);
+            }
+            else if(a>=1000000 && a<1400000) {
+                tax= a- ((400000*5/100) + (a-1000000*10/100));
+            }
+            else if(a>=1400000 && a<1800000) {
+                tax= a- ((400000*5/100) + (400000*10/100) + (a-1400000*15/100));
+            }
+            else {
+                tax= a- ((400000*5/100) + (400000*10/100) + (1800000*15/100) + (a-1800000*15/100));
+            }
+            System.out.println("Tax : "+tax);
+        }
+    }
+}
+
+  
+
+Q2. A school library charges a fine for books returned after the due date acc. To the following condition : -
+Days                        	Fine
+1-5 days                     .40 p
+6-10 days                   .65p exceeding 6 days
+10-15 days                  .80p exceeding 10 days
+15-25 days                   1.20p exceeding 15 days
+# if the book gets misplaced fine of Rs. 500 on each book, with the due date fine on the day of reporting
+# If the book has been hampered Rs.200 on each book, with the due date fine on the day of reporting
+# Calculate total fine acc. To the books lend to the student
+#Due date to return the book is 25 days after the issue date
+
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+
+        System.out.print("Enter the number of days : ");
+        int n = in.nextInt();
+
+        System.out.print("Enter the number of books : ");
+        int numberOfBook = in.nextInt();
+
+
+        System.out.print("Enter the no of misplaced book : ");
+        int numberOfMisplacedBook = in.nextInt();
+
+        System.out.print("Enter the no of misHampered book : ");
+        int numberOfHampedBook = in.nextInt();
+
+        if( numberOfBook < numberOfHampedBook+ numberOfMisplacedBook){
+            System.out.println( " your input is not valid ");
+        }else{
+            double fine = 0.0;
+
+            if (n <= 5)
+                fine = numberOfBook * (n * .40) + ((numberOfMisplacedBook*500 + numberOfHampedBook*200));
+            else if (n > 5 && n <= 10){
+                fine = numberOfBook*(5 * .40 + ((10-n)*.65)) + ((numberOfMisplacedBook*500 + numberOfHampedBook*200));
+            }
+            else if (n > 10 && n <= 15){
+                fine = numberOfBook*((5 * .40 + 5*.65) + ((15-n)*.80)) + ((numberOfMisplacedBook*500 + numberOfHampedBook*200));
+            }
+            else if (n > 15 && n <= 25){
+                fine =  numberOfBook*((5 * .40 + 5*.65 + 5*.80) + ((25-n)*1.20)) + ((numberOfMisplacedBook*500 + numberOfHampedBook*200));
+            }
+
+            System.out.println("Fine to be paid = ₹" + fine);
+        }
+    }
+}
+
+Q3. Special no.
+59
+5  and 9
+5+9 = 14
+5*9 = 45
+14+45 = 59
+
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+
+        System.out.print("Enter two digit number: ");
+        int orgNum = in.nextInt();
+
+        int num = orgNum;
+        int count = 0;
+        int digitSum = 0;
+        int digitProduct = 1;
+
+        while (num != 0) {
+            int digit = num % 10;
+            num /= 10;
+            digitSum += digit;
+            digitProduct *= digit;
+            count++;
+        }
+
+        if (count != 2) {
+            System.out.println("Invalid input");
+        }else{
+            System.out.println(digitSum);
+            System.out.println(digitProduct);
+            System.out.println(digitSum + digitProduct);
+        }
+
+    }
+}
+
+
+Q 4. Spy no. 
+123
+1 +  2  + 3 = 6
+1*2*3= 6
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+
+        System.out.print("Enter number: ");
+        int orgNum = in.nextInt();
+
+        int num = orgNum;
+        int digitSum = 0;
+        int digitProduct = 1;
+
+        while (num != 0) {
+            int digit = num % 10;
+            num /= 10;
+            digitSum += digit;
+            digitProduct *= digit;
+
+        }
+
+        if ( digitProduct != digitSum) {
+            System.out.println("not a spy number");
+        }else{
+            System.out.println("a spy number");
+            System.out.println(digitSum);
+            System.out.println(digitProduct);
+        }
+    }
+}
+
+
+Q 5. Harshad / Niven No.
+Eg. 156=
+1+5+6 = 12
+156/12==0
+
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+
+        System.out.print("Enter number: ");
+        int orgNum = in.nextInt();
+
+        int num = orgNum;
+        int digitSum = 0;
+
+
+        while (num != 0) {
+            int digit = num % 10;
+            num /= 10;
+            digitSum += digit;
+
+
+
+        }
+
+        if ( orgNum % digitSum != 0) {
+            System.out.println(" NOT A Niven Number");
+        }else{
+            System.out.println("NIVEN NUMBER");
+
+        }
+    }
+}
+
+
+Q 6. Duck no. 
+Eg. 2008,7088,010….
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        String number = scanner.nextLine();
+        scanner.close();
+
+        boolean isDuck = isDuckNumber(number);
+        if (isDuck) {
+            System.out.println(number + " is a Duck number.");
+        } else {
+            System.out.println(number + " is not a Duck number.");
+        }
+    }
+
+    public static boolean isDuckNumber(String number) {
+        int length = number.length();
+        boolean hasLeadingZero = number.charAt(0) == '0';
+
+        for (int i = 1; i < length; i++) {
+            if (number.charAt(i) == '0' && !hasLeadingZero) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+
+
+
+Q 7. Neon no.
+ Eg. 9
+9*9 = 81
+8  +   1 = 9
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+        scanner.close();
+
+        boolean isNeon = isNeonNumber(number);
+        if (isNeon) {
+            System.out.println(number + " is a Neon number.");
+        } else {
+            System.out.println(number + " is not a Neon number.");
+        }
+    }
+
+    public static boolean isNeonNumber(int number) {
+        int square = number * number;
+        int sum = 0;
+        while (square != 0) {
+            sum += square % 10;
+            square /= 10;
+        }
+        return sum == number;
+    }
+}
+
+
+
+Q 8.  Automorphic no. 
+25 = 25*25 = 625
+6 = 6*6 = 36
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+        scanner.close();
+
+        boolean isAutomorphic = isAutomorphicNumber(number);
+        if (isAutomorphic) {
+            System.out.println(number + " is an Automorphic number.");
+        } else {
+            System.out.println(number + " is not an Automorphic number.");
+        }
+    }
+
+    public static boolean isAutomorphicNumber(int number) {
+        int square = number * number;
+        String numberString = String.valueOf(number);
+        String squareString = String.valueOf(square);
+
+        return squareString.endsWith(numberString);
+    }
+}
+
+
+
+
+Q 9.   sample input - 8       3      5      2       4     7     9     1 
+       Sample output- 198   75   112    20    16    9     0     0
+
+8 -
+L - 9
+S - 3+ 5 + 2 + 4 + 7 + 1 = 22
+L*S = 9*22 = 198
+
+3
+L - 5+4+7+9 = 25
+S - 2 + 1 = 3
+L*S =  25* 3 = 75
+
+
+
+
+
+
+
+Q 10. Write a program to calculate the electricity bill of a customer while taking input from the user and print name of the customer, contact no., address, meter no.,new reading,current reading , old reading, meter rent,meter no.,  calculate bill depending upon the following conditions :  - 
+
+Current reading(units)                           Charges(Rs.)                              Tax 
+>1 & <100                                           Rs. .80 paise per unit                 2%
+>100 & <300                                         Rs. 1 per unit                         5%
+>300 & < 500                                        Rs. 1.20 per unit                      7%
+>500 & <800                                         Rs. 2 per unit                         11%
+>800 & <1200                                        Rs. 2.50 per unit                      15%
+>1200                                               Rs. 3.40 per unit                      18%
+
+Meter rent is fixed at rs. 50
+
+
+
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter customer name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Enter contact no.: ");
+        String contactNo = scanner.nextLine();
+
+        System.out.print("Enter address: ");
+        String address = scanner.nextLine();
+
+        System.out.print("Enter meter no.: ");
+        String meterNo = scanner.nextLine();
+
+        System.out.print("Enter previous reading: ");
+        int previousReading = scanner.nextInt();
+
+        System.out.print("Enter current reading: ");
+        int currentReading = scanner.nextInt();
+
+        int unitsConsumed = currentReading - previousReading;
+        double billAmount = calculateBillAmount(unitsConsumed);
+        double taxAmount = calculateTaxAmount(billAmount, unitsConsumed);
+        double totalAmount = billAmount + taxAmount + 50; 
+
+        System.out.println("\n--- Electricity Bill ---");
+        System.out.println("Customer Name: " + customerName);
+        System.out.println("Contact No.: " + contactNo);
+        System.out.println("Address: " + address);
+        System.out.println("Meter No.: " + meterNo);
+        System.out.println("New Reading: " + currentReading);
+        System.out.println("Old Reading: " + previousReading);
+        System.out.println("Meter Rent: Rs. 50");
+        System.out.println("Units Consumed: " + unitsConsumed);
+        System.out.println("Bill Amount: Rs. " + billAmount);
+        System.out.println("Tax Amount: Rs. " + taxAmount);
+        System.out.println("Total Amount: Rs. " + totalAmount);
+    }
+
+    public static double calculateBillAmount(int unitsConsumed) {
+        if (unitsConsumed > 1200) {
+            return unitsConsumed * 3.40;
+        } else if (unitsConsumed > 800) {
+            return unitsConsumed * 2.50;
+        } else if (unitsConsumed > 500) {
+            return unitsConsumed * 2.00;
+        } else if (unitsConsumed > 300) {
+            return unitsConsumed * 1.20;
+        } else if (unitsConsumed > 100) {
+            return unitsConsumed * 1.00;
+        } else {
+            return unitsConsumed * 0.80;
+        }
+    }
+
+    public static double calculateTaxAmount(double billAmount, int unitsConsumed) {
+        if (unitsConsumed > 1200) {
+            return billAmount * 0.18;
+        } else if (unitsConsumed > 800) {
+            return billAmount * 0.15;
+        } else if (unitsConsumed > 500) {
+            return billAmount * 0.11;
+        } else if (unitsConsumed > 300) {
+            return billAmount * 0.07;
+        } else if (unitsConsumed > 100) {
+            return billAmount * 0.05;
+        } else {
+            return billAmount * 0.02;
+        }
+    }
+}
+
+
+Q 11  Implement the following function:
+int BalanceFruits(int a, int m, int rs):
+You have a basket full of apples and mangoes, your job is to make the numer of apples and given a function that accepts three integers 'a', 'm' and 'rs' as its argument where 'a' and a basket respectively and 'rs' is the rupees that you have. Implement the function to balance the basket. If 'a' > 'm', then buy (a - m) mangoes at the rate of Rs 1 per mango. If 'a'<'m', then sell (m- a) mangoes at the rate of Rs 1 per mango. Return the total rupees left with you after balancing the fruits,
+Assumption:
+a>=0, m>=0 and rs >= 0 rs >= (a-m)
+Note: If a = m, return rs unchanged
+Sample Input:
+a:8
+m:4
+rs:6
+Sample Output:
+Explanation: Since a > m, (a- m) mangoes are bought at Rs 1per mango, so rs = 6-4 2. Thus, output is 2.
+
+
+
+import java.util.Scanner;
+public class Main {
+    public static int balanceFruits(int a, int m, int rs) {
+        if (a == m) {
+            return rs;
+        } else if (a > m) {
+            int mangoesToBuy = a - m;
+            return rs - mangoesToBuy;
+        } else {
+            int mangoesToSell = m - a;
+            return rs + mangoesToSell;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Scanner scn = new Scanner(System.in);
+        System.out.println("enter a");
+        int a = scn.nextInt();
+
+        System.out.println("enter b");
+        int m = scn.nextInt();
+
+        System.out.println("enter rs ");
+        int rs = scn.nextInt();
+
+        int result = balanceFruits(a, m, rs);
+        System.out.println("Remaining Rupees: " + result);
+    }
+}
+
+Q 12)
+
+You are required to implement the following function:
+int CountSpecificNumbers(int m, int n);
+The function accepts two arguments m and n which are integers. You are required to calculate the count of numbers having only 1, 4 and 9 as their digits between the numbers lving in the range m and n both inclusive, and return the same. Return -1 if m>n.
+Sample Input:
+100
+200
+Sample Output:
+9
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static int CountSpecificNumbers(int m, int n) {
+        if (m > n) {
+            return -1;
+        }
+
+        int count = 0;
+
+        for (int i = m; i <= n; i++) {
+            if (containsOnly149(i)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private static boolean containsOnly149(int num) {
+        while (num > 0) {
+            int digit = num % 10;
+            if (digit != 1 && digit != 4 && digit != 9) {
+                return false;
+            }
+            num /= 10;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+
+        Scanner scn = new Scanner(System.in);
+
+        System.out.println("enter m");
+        int m = scn.nextInt();
+
+        System.out.println("enter n");
+        int n = scn.nextInt();
+
+        int result = CountSpecificNumbers(m, n);
+        System.out.println(result);
+    }
+}
+
+
+13. Find the trailing zeros in the factorial of given no. by the user
+
+Trailing Zeroes
+5! = 120
+10! = 3628800
+100! = 24
+
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static int countTrailingZeros(int number) {
+        int count = 0;
+
+        while (number >= 5) {
+            number /= 5;
+            count += number;
+        }
+
+        return count;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int n = scanner.nextInt();
+
+        int trailingZeros = countTrailingZeros(n);
+
+        System.out.println("Number of trailing zeros in " + n + "! = " + trailingZeros);
+    }
+}
+
+
+
+Q 14. You are given a number N, you need to find the N-th number whose prime factors include 1,2,3,5 in range 1 to 10^3 inclusive
+
+import java.util.Scanner;
+
+import java.util.ArrayList;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        System.out.println("enter number");
+        int n = scn.nextInt(); // The Nth number we want to find
+
+        int number = findNthNumberWithPrimeFactors(n);
+        System.out.println("The " + n + "-th number is: " + number);
+    }
+
+    public static int findNthNumberWithPrimeFactors(int n) {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        int i = 1;
+
+        while (numbers.size() < n) {
+            if (hasPrimeFactors(i)) {
+                numbers.add(i);
+            }
+            i++;
+        }
+
+        return numbers.get(n - 1);
+    }
+
+    public static boolean hasPrimeFactors(int number) {
+        int[] primes = {2, 3, 5}; // Prime factors we're interested in
+
+        for (int prime : primes) {
+            while (number % prime == 0) {
+                number /= prime;
+            }
+        }
+
+        return number == 1;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
