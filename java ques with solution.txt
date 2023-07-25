@@ -616,6 +616,416 @@ public class Main {
 }
 
 
+Q 21) Write a program to print all the Armstrong numbers between the given two intervals by the user.
+
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter initial number");
+        int lowerBound = scanner.nextInt();
+
+        System.out.print("Enter last number");
+        int upperBound = scanner.nextInt();
+
+        System.out.println("Armstrong numbers between " + lowerBound + " and " + upperBound + ":");
+        printArmstrongNumbers(lowerBound, upperBound);
+    }
+
+    // Method to check if a number is an Armstrong number
+    public static boolean isArmstrongNumber(int number) {
+        int originalNumber = number;
+        int sum = 0;
+        int numberOfDigits = String.valueOf(number).length();
+
+        while (number > 0) {
+            int digit = number % 10;
+            sum += Math.pow(digit, numberOfDigits);
+            number /= 10;
+        }
+
+        return sum == originalNumber;
+    }
+
+
+    public static void printArmstrongNumbers(int lowerBound, int upperBound) {
+        for (int i = lowerBound; i <= upperBound; i++) {
+            if (isArmstrongNumber(i)) {
+                System.out.println(i);
+            }
+        }
+    }
+}
+
+
+Q 23. Sorting
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {5, 2, 9, 1, 5, 6};
+
+        // Call the bubbleSort method to sort the array
+        bubbleSort(arr);
+
+        // Print the sorted array
+        System.out.println("Sorted Array: " + Arrays.toString(arr));
+    }
+
+    public static void bubbleSort(int[] arr) {
+        int n = arr.length;
+
+        for (int i = 0; i < n - 1; i++) {
+            boolean swapped = false;
+
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    // Swap elements arr[j] and arr[j+1]
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    swapped = true;
+                }
+            }
+
+            // IF the array is already sorted
+            if (!swapped) {
+                break;
+            }
+        }
+    }
+}
+
+
+
+Q 24. Maximum/Minimum
+
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {5, 2, 9, 1, 5, 6};
+        
+        int[] maxAndMin = findMaxAndMinUsingSort(arr);
+
+        System.out.println("Maximum element: " + maxAndMin[0]);
+        System.out.println("Minimum element: " + maxAndMin[1]);
+    }
+
+    public static int[] findMaxAndMinUsingSort(int[] arr) {
+        if (arr.length == 0) {
+            throw new IllegalArgumentException("Array is empty.");
+        }
+        Arrays.sort(arr);
+        int min = arr[0];
+        int max = arr[arr.length - 1];
+        return new int[]{max, min};
+    }
+}
+
+
+Q 25. Perfect square in an array
+
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {2, 4, 7, 10, 12};
+
+        // Call the perfectSquareOfArray method to calculate the perfect square of each element
+        int[] perfectSquares = perfectSquareOfArray(arr);
+
+        // Print the perfect squares
+        System.out.println("Perfect Squares: " + Arrays.toString(perfectSquares));
+    }
+
+    public static int[] perfectSquareOfArray(int[] arr) {
+        int n = arr.length;
+        int[] perfectSquares = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            int square = arr[i] * arr[i];
+            perfectSquares[i] = square;
+        }
+
+        return perfectSquares;
+    }
+}
+
+
+Q 26. Find even , Odd, Composite, prime, armstrong etc no. in an array.
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {12, 7, 25, 8, 11, 153, 4, 13};
+
+        // Call the methods to find and categorize the numbers
+        int[] evenNumbers = findEvenNumbers(arr);
+        int[] oddNumbers = findOddNumbers(arr);
+        int[] compositeNumbers = findCompositeNumbers(arr);
+        int[] primeNumbers = findPrimeNumbers(arr);
+        int[] armstrongNumbers = findArmstrongNumbers(arr);
+
+        // Print the results
+        System.out.println("Original Array: " + java.util.Arrays.toString(arr));
+        System.out.println("Even Numbers: " + java.util.Arrays.toString(evenNumbers));
+        System.out.println("Odd Numbers: " + java.util.Arrays.toString(oddNumbers));
+        System.out.println("Composite Numbers: " + java.util.Arrays.toString(compositeNumbers));
+        System.out.println("Prime Numbers: " + java.util.Arrays.toString(primeNumbers));
+        System.out.println("Armstrong Numbers: " + java.util.Arrays.toString(armstrongNumbers));
+    }
+
+    public static boolean isEven(int num) {
+        return num % 2 == 0;
+    }
+
+    public static int[] findEvenNumbers(int[] arr) {
+        int[] evenNumbers = new int[arr.length];
+        int count = 0;
+
+        for (int num : arr) {
+            if (isEven(num)) {
+                evenNumbers[count++] = num;
+            }
+        }
+
+        return java.util.Arrays.copyOf(evenNumbers, count);
+    }
+
+    public static int[] findOddNumbers(int[] arr) {
+        int[] oddNumbers = new int[arr.length];
+        int count = 0;
+
+        for (int num : arr) {
+            if (!isEven(num)) {
+                oddNumbers[count++] = num;
+            }
+        }
+
+        return java.util.Arrays.copyOf(oddNumbers, count);
+    }
+
+    public static boolean isComposite(int num) {
+        if (num < 2) {
+            return false;
+        }
+
+        for (int i = 2; i <= num / 2; i++) {
+            if (num % i == 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static int[] findCompositeNumbers(int[] arr) {
+        int[] compositeNumbers = new int[arr.length];
+        int count = 0;
+
+        for (int num : arr) {
+            if (isComposite(num)) {
+                compositeNumbers[count++] = num;
+            }
+        }
+
+        return java.util.Arrays.copyOf(compositeNumbers, count);
+    }
+
+    public static boolean isPrime(int num) {
+        if (num < 2) {
+            return false;
+        }
+
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static int[] findPrimeNumbers(int[] arr) {
+        int[] primeNumbers = new int[arr.length];
+        int count = 0;
+
+        for (int num : arr) {
+            if (isPrime(num)) {
+                primeNumbers[count++] = num;
+            }
+        }
+
+        return java.util.Arrays.copyOf(primeNumbers, count);
+    }
+
+    public static boolean isArmstrong(int num) {
+        int originalNumber = num;
+        int sum = 0;
+
+        while (num > 0) {
+            int digit = num % 10;
+            sum += Math.pow(digit, 3);
+            num /= 10;
+        }
+
+        return originalNumber == sum;
+    }
+
+    public static int[] findArmstrongNumbers(int[] arr) {
+        int[] armstrongNumbers = new int[arr.length];
+        int count = 0;
+
+        for (int num : arr) {
+            if (isArmstrong(num)) {
+                armstrongNumbers[count++] = num;
+            }
+        }
+
+        return java.util.Arrays.copyOf(armstrongNumbers, count);
+    }
+}
+
+
+Q 27. Sum, Average, Median,Mode, Mean of the elements given in an array.
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {12, 7, 25, 8, 11, 8, 4, 13, 25, 7};
+
+        // Call the methods to calculate the required statistics
+        int sum = findSum(arr);
+        double average = findAverage(arr);
+        double median = findMedian(arr);
+        int mode = findMode(arr);
+        double mean = findMean(arr);
+
+        // Print the results
+        System.out.println("Original Array: " + Arrays.toString(arr));
+        System.out.println("Sum: " + sum);
+        System.out.println("Average: " + average);
+        System.out.println("Median: " + median);
+        System.out.println("Mode: " + mode);
+        System.out.println("Mean: " + mean);
+    }
+
+    public static int findSum(int[] arr) {
+        int sum = 0;
+        for (int num : arr) {
+            sum += num;
+        }
+        return sum;
+    }
+
+    public static double findAverage(int[] arr) {
+        int sum = findSum(arr);
+        return (double) sum / arr.length;
+    }
+
+    public static double findMedian(int[] arr) {
+        Arrays.sort(arr);
+        int n = arr.length;
+        if (n % 2 == 0) {
+            return (double) (arr[n / 2 - 1] + arr[n / 2]) / 2;
+        } else {
+            return arr[n / 2];
+        }
+    }
+
+    public static int findMode(int[] arr) {
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        for (int num : arr) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+        }
+
+        int maxFrequency = 0;
+        int mode = Integer.MIN_VALUE;
+        for (Map.Entry<Integer, Integer> entry : frequencyMap.entrySet()) {
+            int frequency = entry.getValue();
+            if (frequency > maxFrequency) {
+                maxFrequency = frequency;
+                mode = entry.getKey();
+            }
+        }
+
+        return mode;
+    }
+
+    public static double findMean(int[] arr) {
+        int n = arr.length;
+        double sum = findSum(arr);
+        return sum / n;
+    }
+}
+
+
+Q 28. Remove/Print/count the most repeated element in the array.
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {4, 2, 5, 3, 5, 1, 5, 2, 5};
+
+        // Call the methods to remove, print, and count the most repeated element
+        int mostRepeatedElement = findMostRepeatedElement(arr);
+        int[] newArrayWithoutMostRepeated = removeMostRepeatedElement(arr, mostRepeatedElement);
+        int countOfMostRepeatedElement = countOccurrences(arr, mostRepeatedElement);
+
+        // Print the results
+        System.out.println("Original Array: " + Arrays.toString(arr));
+        System.out.println("Most Repeated Element: " + mostRepeatedElement);
+        System.out.println("Array without Most Repeated Element: " + Arrays.toString(newArrayWithoutMostRepeated));
+        System.out.println("Count of Most Repeated Element: " + countOfMostRepeatedElement);
+    }
+
+    public static int findMostRepeatedElement(int[] arr) {
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        int mostRepeatedElement = 0;
+        int maxFrequency = 0;
+
+        for (int num : arr) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+            if (frequencyMap.get(num) > maxFrequency) {
+                mostRepeatedElement = num;
+                maxFrequency = frequencyMap.get(num);
+            }
+        }
+
+        return mostRepeatedElement;
+    }
+
+    public static int[] removeMostRepeatedElement(int[] arr, int element) {
+        int count = countOccurrences(arr, element);
+        int[] newArray = new int[arr.length - count];
+
+        int index = 0;
+        for (int num : arr) {
+            if (num != element) {
+                newArray[index++] = num;
+            }
+        }
+
+        return newArray;
+    }
+
+    public static int countOccurrences(int[] arr, int element) {
+        int count = 0;
+        for (int num : arr) {
+            if (num == element) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
+
+
 
 
 
