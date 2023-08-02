@@ -1025,6 +1025,162 @@ public class Main {
     }
 }
 
+40) 
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the size of the array: ");
+        int n = scanner.nextInt();
+        int[] input = new int[n];
+        System.out.println("Enter the elements of the array:");
+        for (int i = 0; i < n; i++) {
+            input[i] = scanner.nextInt();
+        }
+
+        int result = findMaxLengthSubarray(input);
+        System.out.println("Output: " + result);
+        scanner.close();
+    }
+
+    public static int findMaxLengthSubarray(int[] arr) {
+        int n = arr.length;
+        int maxLength = 0;
+
+
+        for (int i = 0; i < n; i++) {
+            int count0 = 0;
+            int count1 = 0;
+
+            for (int j = i; j < n; j++) {
+                if (arr[j] == 0) {
+                    count0++;
+                } else {
+                    count1++;
+                }
+
+                // Check if the subarray has equal number of 0s and 1s
+
+                if (count0 == count1) {
+                    maxLength = Math.max(maxLength, j - i + 1);
+                }
+            }
+        }
+
+        return maxLength;
+    }
+}
+
+41)
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // arr1 as input
+        System.out.print("Enter the size of arr1: ");
+        int n1 = scanner.nextInt();
+        int[] arr1 = new int[n1];
+        System.out.println("Enter the elements of arr1:");
+        for (int i = 0; i < n1; i++) {
+            arr1[i] = scanner.nextInt();
+        }
+
+        // arr2 as input
+        System.out.print("Enter the size of arr2: ");
+        int n2 = scanner.nextInt();
+        int[] arr2 = new int[n2];
+        System.out.println("Enter the elements of arr2:");
+        for (int i = 0; i < n2; i++) {
+            arr2[i] = scanner.nextInt();
+        }
+
+        // k as input 
+        System.out.print("Enter the value of k: ");
+        int k = scanner.nextInt();
+
+        int largerCount = countLargerThanK(arr1, k);
+        int smallerCount = countSmallerThanK(arr2, k);
+        int result = Math.max(largerCount, smallerCount);
+        System.out.println("Output: " + result);
+
+        scanner.close();
+    }
+
+    public static int countLargerThanK(int[] arr, int k) {
+        int count = 0;
+        for (int num : arr) {
+            if (num > k) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static int countSmallerThanK(int[] arr, int k) {
+        int count = 0;
+        for (int num : arr) {
+            if (num < k) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
+
+Q 42. Sum of product of two arrays
+   Arr 1 - {22,7,1,-5,5,-2}  
+   Arr 2 - {4,-1,21,12,10,-3}
+   Output = -102
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+
+        System.out.print("Enter the size of arr1: ");
+        int n1 = scanner.nextInt();
+        int[] arr1 = new int[n1];
+        System.out.println("Enter the elements of arr1:");
+        for (int i = 0; i < n1; i++) {
+            arr1[i] = scanner.nextInt();
+        }
+
+        System.out.print("Enter the size of arr2: ");
+        int n2 = scanner.nextInt();
+        int[] arr2 = new int[n2];
+        System.out.println("Enter the elements of arr2:");
+        for (int i = 0; i < n2; i++) {
+            arr2[i] = scanner.nextInt();
+        }
+
+        int result = calculateSumOfProduct(arr1, arr2);
+        System.out.println("Output: " + result);
+
+        scanner.close();
+    }
+
+    public static int calculateSumOfProduct(int[] arr1, int[] arr2) {
+        if (arr1.length != arr2.length) {
+            throw new IllegalArgumentException("Arrays must have the same length.");
+        }
+
+        int sum = 0;
+        for (int i = 0; i < arr1.length; i++) {
+            sum += arr1[i] * arr2[i];
+        }
+        return sum;
+    }
+}
+
 
 
 
